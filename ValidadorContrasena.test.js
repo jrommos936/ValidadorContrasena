@@ -1,43 +1,18 @@
-const validatePassword = require('./ValidadorContrasena');
+const validatePassword = require('./ValidadorContrasena'); 
+test('Una contraseña válida pasa la validación', () => {    
+    expect(validatePassword('StrongPass1!')).toBe(true); }); 
 
-describe('Validador de Contraseña', () => {
-    test('debería ser válida con al menos 8 caracteres, una mayúscula, una minúsculas, un número y un caracter especial', () => {
-        const password = 'Contrasena1234@';
-        expect(validatePassword(password)).toBe(true);
-    });
+test('Una contraseña demasiado corta no pasa la validación', () => {    
+    expect(validatePassword('Shrt1!')).toBe(false); }); 
 
-    test('debería ser inválida si tiene menos de 8 caracteres', () => {
-        const password = 'C12@';
-        expect(validatePassword(password)).toBe(false);
-    });
+test('Una contraseña sin letra mayúscula no pasa la validación', () => {    
+    expect(validatePassword('weakpass1!')).toBe(false); }); 
 
-    test('debería ser inválida si no tiene mayúsculas', () => {
-        const password = 'holaq12@';
-        expect(validatePassword(password)).toBe(false);
-    });
+test('Una contraseña sin letra minúscula no pasa la validación', () => {    
+    expect(validatePassword('WEAKPASS1!')).toBe(false); }); 
 
-    test('debería ser inválida si no tiene minúsculas', () => {
-        const password = 'HOLA@12';
-        expect(validatePassword(password)).toBe(false);
-    });
+test('Una contraseña sin número no pasa la validación', () => {    
+    expect(validatePassword('NoNumber!')).toBe(false); }); 
 
-    test('debería ser inválida si no tiene números', () => {
-        const password = 'Que@tal';
-        expect(validatePassword(password)).toBe(false);
-    });
-
-    test('debería ser inválida si no tiene caracteres especiales', () => {
-        const password = 'Holamuybuenas12';
-        expect(validatePassword(password)).toBe(false);
-    });
-
-    test('debería ser inválida si no cumple con todos los requisitos', () => {
-        const password = 'hey123';
-        expect(validatePassword(password)).toBe(false);
-    });
-
-    test('debería ser válida con todos los requisitos cumplidos', () => {
-        const password = 'Valida@345';
-        expect(validatePassword(password)).toBe(true);
-    });
-});
+test('Una contraseña sin carácter especial no pasa la validación', () => {   
+     expect(validatePassword('NoSpecial1')).toBe(false); });
